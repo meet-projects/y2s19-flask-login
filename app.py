@@ -16,9 +16,9 @@ def login():
     if user != None and user.verify_password(request.form["password"]):
         login_session['name'] = user.username
         login_session['logged_in'] = True
-        return logged_in()
+        return redirect('logged_in')
     else:
-        return home()
+        return redirect('home')
 
 
 @app.route('/signup', methods=['POST'])
@@ -27,7 +27,7 @@ def signup():
     user = get_user(request.form['username'])
     if user == None:
         add_user(request.form['username'],request.form['password'])
-    return home()
+    return redirect('home')
 
 
 @app.route('/logged-in')
@@ -37,7 +37,7 @@ def logged_in():
 
 @app.route('/logout')
 def logout():
-    return home()
+    return redirect('home')
 
 
 
